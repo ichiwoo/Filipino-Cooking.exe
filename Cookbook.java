@@ -6,12 +6,12 @@ public class Cookbook {
 
     public Cookbook() {
         this.allRecipes = new ArrayList<>();
-        initializeRecipes(); // Abstraction: hides the complex data setup
+        initializeRecipes();
+        addSpecializedRecipes();
     }
 
-    // --- Abstraction: Hides the data creation complexity ---
     private void initializeRecipes() {
-        // --- Meat and Poultry ---
+        // Meat and Poultry
         allRecipes.add(new Recipe(
             "Adobo (Chicken/Pork)",
             Arrays.asList("chicken or pork", "soy sauce", "vinegar", "garlic", "peppercorns", "bay leaf"),
@@ -26,7 +26,7 @@ public class Cookbook {
             "Meat and Poultry"
         ));
 
-        // --- Fish and Seafood ---
+        // Fish and Seafood
         allRecipes.add(new Recipe(
             "Ginataang Tilapia",
             Arrays.asList("tilapia", "coconut milk", "ginger", "garlic", "onion", "chili (optional)", "malunggay leaves"),
@@ -34,7 +34,7 @@ public class Cookbook {
             "Fish and Seafood"
         ));
 
-        // --- Vegetables ---
+        // Vegetables
         allRecipes.add(new Recipe(
             "Pinakbet",
             Arrays.asList("squash (kalabasa)", "okra", "eggplant", "long beans", "shrimp paste (bagoong)"),
@@ -42,48 +42,89 @@ public class Cookbook {
             "Vegetables"
         ));
     }
-    // --- End of Data Abstraction ---
 
-    /**
-     * Core logic: Finds recipes that can be made with the user's ingredients.
-     * @param userIngredientsList The list of ingredient names provided by the user.
-     * @return A map where the key is the Recipe and the value is the count of missing ingredients.
-     */
     public Map<Recipe, Integer> findPossibleRecipes(List<String> userIngredientsList) {
-        Map<Recipe, Integer> results = new HashMap<>();
-        Set<String> userIngredients = userIngredientsList.stream()
-                                          .map(String::toLowerCase)
-                                          .collect(Collectors.toSet());
+    Map<Recipe, Integer> results = new HashMap<>();
+    
+    // Normalize user ingredients
+    Set<String> userIngredients = userIngredientsList.stream()
+                                      .map(ing -> ing.trim().toLowerCase())
+                                      .collect(Collectors.toSet());
 
-        for (Recipe recipe : allRecipes) {
-            int missingCount = 0;
+    for (Recipe recipe : allRecipes) {
+        int missingCount = 0;
+        
+        for (String required : recipe.getRequiredIngredients()) {
+            // Check if any user ingredient contains the required ingredient
+            boolean found = userIngredients.stream()
+                .anyMatch(userIng -> containsIngredient(userIng, required.toLowerCase()));
             
-            for (String required : recipe.getRequiredIngredients()) {
-                if (!userIngredients.contains(required.toLowerCase())) {
-                    missingCount++;
-                }
+            if (!found) {
+                missingCount++;
             }
-            
-            results.put(recipe, missingCount);
         }
-        return results;
+        
+        results.put(recipe, missingCount);
     }
+    return results;
+}
 
-    /**
-     * @return All recipes, sorted by category.
-     */
+// Helper method for better ingredient matching
+private boolean containsIngredient(String userIngredient, String requiredIngredient) {
+    // Handle compound ingredients like "chicken or pork"
+    if (requiredIngredient.contains(" or ")) {
+        String[] options = requiredIngredient.split(" or ");
+        for (String option : options) {
+            if (userIngredient.contains(option.trim()) || option.trim().contains(userIngredient)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // Basic contains check
+    return userIngredient.contains(requiredIngredient) || requiredIngredient.contains(userIngredient);
+}
+
     public Map<String, List<Recipe>> getAllRecipesByCategory() {
         return allRecipes.stream()
             .collect(Collectors.groupingBy(Recipe::getCategory));
     }
     
-    /**
-     * Finds a recipe by its name.
-     */
     public Recipe getRecipeByName(String name) {
         return allRecipes.stream()
             .filter(r -> r.getName().equalsIgnoreCase(name))
             .findFirst()
             .orElse(null);
+    }
+
+    public Recipe[] getAllRecipesArray() {
+        return allRecipes.toArray(new Recipe[0]);
+    }
+    
+    public Recipe getRecipeByNameWithException(String name) throws RecipeNotFoundException {
+        Recipe recipe = getRecipeByName(name);
+        if (recipe == null) {
+            throw new RecipeNotFoundException("Recipe '" + name + "' not found");
+        }
+        return recipe;
+    }
+    
+    private void addSpecializedRecipes() {
+        allRecipes.add(new TraditionalRecipe(
+            "Kare-Kare",
+            Arrays.asList("oxtail", "peanut butter", "eggplant", "string beans", "banana blossom", "shrimp paste"),
+            "1. Boil oxtail until tender. 2. Add vegetables and peanut sauce. 3. Simmer until thick. 4. Serve with shrimp paste.",
+            "Meat and Poultry",
+            "Central Luzon"
+        ));
+        
+        allRecipes.add(new QuickRecipe(
+            "Tortang Talong", 
+            Arrays.asList("eggplant", "eggs", "onion", "garlic", "salt", "pepper"),
+            "1. Grill eggplant until soft. 2. Peel and flatten. 3. Dip in beaten eggs. 4. Pan-fry until golden brown.",
+            "Vegetables",
+            15
+        ));
     }
 }

@@ -1,13 +1,10 @@
-public class Ingredient {
-    private String name;
-
+public class Ingredient extends FoodItem {
     public Ingredient(String name) {
-        this.name = name.trim().toLowerCase();
+        super(name.trim().toLowerCase()); // Call parent constructor
     }
-
-    public String getName() {
-        return name;
+    
+    @Override
+    public void displayInfo() {
+        System.out.println("🥬 Ingredient: " + name);
     }
-
-    // No setter needed, as ingredients shouldn't change once created
 }

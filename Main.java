@@ -4,8 +4,7 @@ import java.util.stream.Collectors;
 public class Main {
     private Scanner scanner;
     private Cookbook cookbook;
-    // Polymorphism: List can hold Ingredient objects
-    private List<Ingredient> inventory; 
+    private List<Ingredient> inventory;
 
     public Main() {
         this.scanner = new Scanner(System.in);
@@ -19,17 +18,16 @@ public class Main {
     }
 
     public void run() {
-        displayMessage();
+        displayWelcome();
         mainMenu();
     }
 
-    private void displayMessage() {
+    private void displayWelcome() {
         System.out.println("==============================================");
-        System.out.println("🇵🇭 FILIPINO COOKING ASSISTANT v1.0 (OOP Edition)");
+        System.out.println("           FILIPINO COOKING ASSISTANT");
         System.out.println("==============================================");
     }
 
-    // --- Main Menu Loop ---
     private void mainMenu() {
         String choice = "";
         while (!choice.equalsIgnoreCase("exit")) {
@@ -37,12 +35,12 @@ public class Main {
             System.out.println("1. Start (tara luto tayo!)");
             System.out.println("2. Check my inventory");
             System.out.println("3. View full recipe catalog");
-            System.out.println("4. help/about");
-            System.out.println("5. exit (byebye)");
+            System.out.println("4. Help/About");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice (1-5): ");
 
             choice = scanner.nextLine().trim();
-            System.out.println(); // Newline for clean output
+            System.out.println();
 
             switch (choice) {
                 case "1":
@@ -58,89 +56,95 @@ public class Main {
                     displayHelp();
                     break;
                 case "5":
-                    System.out.println("Salamat! Ingat at Kain Na! 👋");
+                    System.out.println("Thank you for using Filipino Cooking Assistant! ;)\nSalamat!");
                     choice = "exit";
                     break;
                 default:
-                    System.out.println("❌ Invalid choice. Please enter a number from 1 to 5.");
+                    System.out.println("Invalid choice. Please enter 1-5.");
             }
         }
     }
 
-    // --- 1. Start Cooking ---
     private void startCooking() {
-        inventory.clear(); // Clear old ingredients for a new session
-        System.out.println("--- 🔪 START COOKING ---");
-        System.out.println("Please enter the ingredients you have right now, separated by commas (e.g., chicken, soy sauce, garlic, onion).");
-        System.out.println("Type 'done' when you are finished.");
-
-        System.out.print("Input Ingredients: ");
-        String input = scanner.nextLine();
-
-        if (input.trim().isEmpty() || input.trim().toLowerCase().equals("done")) {
-            System.out.println("Nothing entered. Returning to Main Menu.");
+        inventory.clear();
+        System.out.println("--- START COOKING ---");
+        System.out.println("Enter ingredients separated by commas:");
+        System.out.println("Example: chicken, soy sauce, garlic, onion");
+        System.out.print("Your ingredients: ");
+        
+        String input = scanner.nextLine().trim();
+        
+        if (input.isEmpty()) {
+            System.out.println("No ingredients entered. Returning to menu.");
             return;
         }
 
+        // Process ingredients
+        Set<String> uniqueIngredients = new HashSet<>();
         String[] parts = input.split(",");
         for (String part : parts) {
-            if (!part.trim().isEmpty()) {
-                inventory.add(new Ingredient(part));
+            String ingredient = part.trim().toLowerCase();
+            if (!ingredient.isEmpty() && uniqueIngredients.add(ingredient)) {
+                inventory.add(new Ingredient(ingredient));
             }
         }
-        
-        System.out.println("\n(Transition) Processing ingredients..... 🔄");
+
+        if (inventory.isEmpty()) {
+            System.out.println("No valid ingredients found.");
+            return;
+        }
+
+        System.out.println("\nProcessing ingredients...");
         processIngredients();
     }
 
     private void processIngredients() {
-        if (inventory.isEmpty()) {
-            System.out.println("Your inventory is empty. Cannot suggest a meal.");
-            return;
-        }
-
-        // Convert inventory to a list of ingredient names for the Cookbook search
         List<String> userIngredientsNames = inventory.stream()
             .map(Ingredient::getName)
             .collect(Collectors.toList());
 
-        // Abstraction: Cookbook handles the matching logic
         Map<Recipe, Integer> results = cookbook.findPossibleRecipes(userIngredientsNames);
 
-        System.out.println("\n--- 🌟 RESULTS: WHAT YOU CAN COOK RIGHT NOW! ---");
+        System.out.println("\n--- WHAT YOU CAN COOK ---");
         
         // Filter and sort results
-        Map<Recipe, Integer> sortedResults = results.entrySet().stream()
+        List<Map.Entry<Recipe, Integer>> filteredResults = results.entrySet().stream()
+            .filter(entry -> entry.getValue() < entry.getKey().getRequiredIngredients().size())
             .sorted(Map.Entry.comparingByValue())
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+            .collect(Collectors.toList());
 
-        List<String> recipeChoices = new ArrayList<>();
+        if (filteredResults.isEmpty()) {
+            System.out.println("No recipes found with your ingredients.");
+            return;
+        }
+
+        // Display recipes
         int recipeCount = 1;
-
-        for (Map.Entry<Recipe, Integer> entry : sortedResults.entrySet()) {
+        List<String> recipeChoices = new ArrayList<>();
+        
+        for (Map.Entry<Recipe, Integer> entry : filteredResults) {
             Recipe recipe = entry.getKey();
             int missing = entry.getValue();
+            int total = recipe.getRequiredIngredients().size();
             recipeChoices.add(recipe.getName());
             
             String status;
             if (missing == 0) {
-                status = "**PERFECT!** (All ingredients found!) 🎉";
-            } else if (missing <= 2) {
-                status = "Missing " + missing + " ingredient(s).";
+                status = "COMPLETE - Ready to cook!";
+            } else if (missing == 1) {
+                status = "ALMOST - Missing 1 ingredient";
+            } else if (missing == 2) {
+                status = "CLOSE - Missing 2 ingredients";
+            } else if (missing <= 4) {
+                status = "NEEDS SOME - Missing " + missing + " of " + total;
             } else {
-                status = "Missing " + missing + " or more ingredients. (May require a market run!)";
+                status = "NEEDS MANY - Missing " + missing + " of " + total;
             }
             
-            System.out.printf("%d. %s - %s\n", recipeCount++, recipe.getName(), status);
+            System.out.printf("%d. %s\n     %s\n", recipeCount++, recipe.getName(), status);
         }
 
-        if (recipeChoices.isEmpty()) {
-            System.out.println("💔 Sorry, based on your ingredients, we couldn't find any match.");
-            return;
-        }
-
-        // User chooses a recipe
-        System.out.print("\nSelect a number to view the full recipe, or type 'M' to go back to the Main Menu: ");
+        System.out.print("\nSelect recipe number for details, or 'M' for menu: ");
         String choice = scanner.nextLine();
 
         if (choice.equalsIgnoreCase("M")) {
@@ -156,29 +160,27 @@ public class Main {
                     selectedRecipe.displayRecipe();
                 }
             } else {
-                System.out.println("❌ Invalid selection number.");
+                System.out.println("Invalid selection.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input. Returning to Main Menu.");
+            System.out.println("Please enter a valid number.");
         }
     }
 
-
-    // --- 2. Check Inventory ---
     private void checkInventory() {
-        System.out.println("--- 📦 MY INVENTORY ---");
+        System.out.println("--- MY INVENTORY ---");
         if (inventory.isEmpty()) {
-            System.out.println("Your inventory is currently empty. Go to 'Start' to input ingredients.");
+            System.out.println("Your inventory is empty.");
+            System.out.println("Go to 'Start Cooking' to add ingredients.");
             return;
         }
 
-        System.out.println("\n** Current Ingredients **");
+        System.out.println("\nYour ingredients:");
         for (int i = 0; i < inventory.size(); i++) {
-            // Accessing Ingredient name via getter (Encapsulation)
             System.out.printf("%d. %s\n", (i + 1), inventory.get(i).getName());
         }
 
-        System.out.print("\nWould you like to see what you can cook with these ingredients? (Y/N): ");
+        System.out.print("\nFind recipes with these? (Y/N): ");
         String choice = scanner.nextLine();
         
         if (choice.equalsIgnoreCase("Y")) {
@@ -186,20 +188,18 @@ public class Main {
         }
     }
     
-    // --- 3. View Full Recipe Catalog ---
     private void viewRecipeCatalog() {
-        System.out.println("--- 📖 FULL RECIPE CATALOG ---");
+        System.out.println("--- RECIPE CATALOG ---");
         Map<String, List<Recipe>> categorizedRecipes = cookbook.getAllRecipesByCategory();
         
-        int categoryCounter = 1;
-        List<String> categoryOrder = new ArrayList<>(categorizedRecipes.keySet());
+        List<String> categories = new ArrayList<>(categorizedRecipes.keySet());
 
-        System.out.println("\n** RECIPE CATEGORIES **");
-        for (int i = 0; i < categoryOrder.size(); i++) {
-            System.out.printf("%d. %s (%d recipes)\n", (i + 1), categoryOrder.get(i), categorizedRecipes.get(categoryOrder.get(i)).size());
+        System.out.println("\nCategories:");
+        for (int i = 0; i < categories.size(); i++) {
+            System.out.printf("%d. %s\n", (i + 1), categories.get(i));
         }
 
-        System.out.print("\nEnter the number of the category you want to view, or 'M' for Main Menu: ");
+        System.out.print("\nSelect category number, or 'M' for menu: ");
         String choice = scanner.nextLine();
 
         if (choice.equalsIgnoreCase("M")) {
@@ -208,19 +208,16 @@ public class Main {
         
         try {
             int categoryIndex = Integer.parseInt(choice) - 1;
-            if (categoryIndex >= 0 && categoryIndex < categoryOrder.size()) {
-                String selectedCategory = categoryOrder.get(categoryIndex);
-                System.out.println("\n** RECIPES in " + selectedCategory.toUpperCase() + " **");
-                
+            if (categoryIndex >= 0 && categoryIndex < categories.size()) {
+                String selectedCategory = categories.get(categoryIndex);
                 List<Recipe> recipes = categorizedRecipes.get(selectedCategory);
-                Map<Integer, String> recipeMap = new HashMap<>();
                 
+                System.out.println("\n--- " + selectedCategory.toUpperCase() + " ---");
                 for (int i = 0; i < recipes.size(); i++) {
                     System.out.printf("%d. %s\n", (i + 1), recipes.get(i).getName());
-                    recipeMap.put(i + 1, recipes.get(i).getName());
                 }
 
-                System.out.print("\nSelect a recipe number for details, or 'M' for Main Menu: ");
+                System.out.print("\nSelect recipe number for details, or 'M' for menu: ");
                 String recipeChoice = scanner.nextLine();
                 
                 if (recipeChoice.equalsIgnoreCase("M")) {
@@ -228,31 +225,27 @@ public class Main {
                 }
                 
                 int recipeNum = Integer.parseInt(recipeChoice);
-                String selectedRecipeName = recipeMap.get(recipeNum);
-                
-                if (selectedRecipeName != null) {
-                    cookbook.getRecipeByName(selectedRecipeName).displayRecipe();
+                if (recipeNum > 0 && recipeNum <= recipes.size()) {
+                    recipes.get(recipeNum - 1).displayRecipe();
                 } else {
-                    System.out.println("❌ Invalid recipe number.");
+                    System.out.println("Invalid recipe number.");
                 }
             } else {
-                System.out.println("❌ Invalid category number.");
+                System.out.println("Invalid category number.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("❌ Invalid input. Returning to Main Menu.");
+            System.out.println("Please enter a valid number.");
         }
     }
 
-
-    // --- 4. Help/About ---
     private void displayHelp() {
-        System.out.println("--- ℹ️ HELP / ABOUT ---");
-        System.out.println("Welcome to the Filipino Cooking Assistant! Your personal guide to Pinoy dishes.");
-        System.out.println("\n** How to Use **");
-        System.out.println("1. **Start (tara luto tayo!)**: This is where the magic happens! Enter a list of ingredients you have (e.g., 'pork, soy sauce, garlic'). The program will check against its catalog and show you what you can cook.");
-        System.out.println("2. **Check my inventory**: Views the ingredients you last input during the 'Start' option and gives you the choice to re-run the cooking suggestion.");
-        System.out.println("3. **View full recipe catalog**: See all the delicious Filipino recipes available, categorized for easy browsing.");
-        System.out.println("4. **help/about**: You are here!");
-        System.out.println("5. **exit**: Close the program.");
+        System.out.println("--- HELP/ABOUT ---");
+        System.out.println("How to use:");
+        System.out.println("1. Start Cooking - Enter ingredients to find recipes");
+        System.out.println("2. Check Inventory - View your saved ingredients");
+        System.out.println("3. View Recipes - Browse all available recipes");
+        System.out.println("4. Help - Show this information");
+        System.out.println("5. Exit - Close the program");
+        System.out.println("\nEnjoy cooking! ;)");
     }
 }
