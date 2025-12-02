@@ -2,7 +2,7 @@
 <h1 align="center" style="color:hotpink;">👨‍🍳 Filipino Cooking Assistant 👩‍🍳</h1>
 
 
-## 💡Description/Overview💡
+## 💡 Description/Overview 💡
 Deciding what to cook can be difficult, especially when ingredients are available but ideas are not. This Java command-line application helps users reduce stress and avoid food waste by suggesting Filipino recipes based on the ingredients they have. The system includes 30+ recipes across categories such as Meat and Poultry, Fish and Seafood, Vegetables, Soup, and Snack/Dessert. Users can view suggested dishes, browse the full recipe catalog, and manage their ingredient inventory. The program also indicates which recipes can’t be cooked due to missing ingredients. With simple inputs, cooking becomes easier, faster, and more efficient.
 
 🔘 Main Features:
@@ -14,80 +14,80 @@ Deciding what to cook can be difficult, especially when ingredients are availabl
   - Inventory management: Track and reuse your ingredient list
 
 
-## 💻OOP Concepts Applied💻
+## 💻 OOP Concepts Applied 💻
 
-### 💊Encapsulation
+### 💊 Encapsulation
 - All class fields are declared as private with controlled access through public getter and setter methods
 - Internal data structures (like the recipe list in Cookbook) are hidden from external classes
 - Data validation and normalization are handled internally (e.g., ingredient name trimming in Ingredient class)
 
-### 👨‍👩‍👧Inheritance
+### 👨‍👩‍👧 Inheritance
 - FoodItem abstract class serves as the base class for all food-related entities
 - Recipe extends FoodItem, inheriting common properties like name
 - QuickRecipe and TraditionalRecipe extend Recipe, inheriting recipe properties while adding specialized functionality
 - Ingredient extends FoodItem, creating a hierarchy of food-related objects
 
-### 🐛Polymorphism
+### 🐛 Polymorphism
 - Method Overriding: displayInfo() and displayRecipe() methods are overridden in subclasses to provide specialized behavior
 - Abstract Methods: The abstract displayInfo() method in FoodItem is implemented differently in Recipe, QuickRecipe, and TraditionalRecipe
 - Runtime Binding: The correct display method is called based on the actual object type at runtime
 
-### 🖼️Abstraction
+### 🖼️ Abstraction
 - FoodItem abstract class defines the common interface without implementation details
 - Complex recipe matching algorithms are abstracted behind simple public methods in Cookbook
 - Users interact with high-level operations without needing to understand the internal data structures
 
-## 💡Program Structure💡
+## 💡 Program Structure 💡
 ### 🔘Main Classes and Their Roles
 
-**🏠Main** - The primary entry point and user interface controller
+**🏠 Main** - The primary entry point and user interface controller
 - Manages the main program loop and menu navigation
 - Handles all user input through the Scanner object
 - Coordinates interactions between the user, Cookbook, and inventory
 - Implements the console-based user interface with clear menu options
 
-**📔Cookbook** - The central database and recipe manager
+**📔 Cookbook** - The central database and recipe manager
 - Stores and organizes all recipe objects in an ArrayList
 - Implements recipe search and matching algorithms using Stream API
 - Groups recipes by category using HashMap for efficient organization
 - Provides methods to find recipes based on available ingredients
 - Contains helper methods for ingredient matching and normalization
 
-**🍲FoodItem** (abstract) - The foundation of the food hierarchy
+**🍲 FoodItem** (abstract) - The foundation of the food hierarchy
 - Defines the common name property for all food-related items
 - Declares the abstract displayInfo() method that all subclasses must implement
 - Establishes the base structure for the inheritance hierarchy
 
-**📖Recipe** - Represents a complete cooking recipe
+**📖 Recipe** - Represents a complete cooking recipe
 - Extends FoodItem and serves as the base for specialized recipes
 - Stores recipe details: name, required ingredients list, instructions, and category
 - Implements the displayInfo() method to show recipe details
 - Contains the core recipe display logic with formatted output
 
-**📑QuickRecipe** - Specialized recipe for fast meals
+**📑 QuickRecipe** - Specialized recipe for fast meals
 - Extends Recipe class
 - Adds preparation time property (in minutes)
 - Overrides displayInfo() to include quick meal details
 - Represents recipes that can be prepared in under 20 minutes
 
-**🧾TraditionalRecipe** - Specialized recipe for regional dishes
+**🧾 TraditionalRecipe** - Specialized recipe for regional dishes
 - Extends Recipe class
 - Adds region of origin property
 - Overrides displayInfo() to include regional information
 - Represents traditional Filipino dishes from specific regions
 
-**🍅Ingredient** - Represents individual food ingredients
+**🍅 Ingredient** - Represents individual food ingredients
 - Extends FoodItem
 - Normalizes ingredient names (trimming and converting to lowercase)
 - Implements simple display functionality
 - Used in the user's ingredient inventory
 
-**‼️RecipeNotFoundException** - Custom exception class
+**‼️ RecipeNotFoundException** - Custom exception class
 - Extends Exception class
 - Used when a requested recipe cannot be found
 - Provides meaningful error messages for better user experience
 
-### 💡Class Hierarchy and Relationships💡
+### 💡 Class Hierarchy and Relationships 💡
 
 ```bash
 FoodItem (abstract)
@@ -104,20 +104,20 @@ Main (Program Entry Point)
 └── RecipeNotFoundException (Custom Exception)
 ```
 
-### Key Relationships
+### 🔑 Key Relationships 🗝️
 - Composition: Cookbook contains a List of Recipe objects
 - Aggregation: Main contains Cookbook and List<Ingredient> objects  
 - Inheritance: QuickRecipe and TraditionalRecipe inherit from Recipe
 - Dependency: Main depends on Cookbook for recipe operations
   
 
-## How to Run the Program
+## 🏃‍♀️ How to Run the Program 🏃‍♀️
 
-### Prerequisites
+### 🖇️ Prerequisites 🖇️
 - Java Development Kit (JDK) 8 or higher
 - Command line/terminal access
 
-### Steps to Compile and Run
+### 👩‍💻 Steps to Compile and Run 👨‍💻
 
 1. Save all Java files in the same directory:
    - Main.java
@@ -140,7 +140,7 @@ Main (Program Entry Point)
    ```
    java Main
    ```
-## 📸 Sample Output
+## 📸 Sample Output 📸
 
 | Screenshot | Description |
 |------------|-------------|
@@ -171,16 +171,16 @@ Main (Program Entry Point)
 
 ---
 
-## 👩‍🍳 Authors and Acknowledgements
+## 👩‍🍳 Authors and Acknowledgements 👩‍🍳
 
-### 🧑‍💻 **Authors**
+###  **👨‍💻 Authors 👩‍💻**
 | Name | Role | Contact |
 |------|------|---------|
 | **Jhunethertynn V. Dejayco** | Developer | 📧 24-04752@g.batstate-u.edu.ph<br>🐱 GitHub: jhunethertynn |
 | **Rein Ainakelle P. Peralta** | Developer | 📧 24-08568@g.batstate-u.edu.ph<br>🐱 GitHub: strawberreinn |
 | **Ichiro A. Plata** | Leader & Developer | 📧 24-05401@g.batstate-u.edu.ph<br>🐱 GitHub: ichiwoo |
 
-### 🙏 **Acknowledgement**
+###  **🙏 Acknowledgement 🙏**
 We would like to express our gratitude to everyone who contributed to the completion of this project:
 
 - Our professor, **Sir Emmanuel Charlie Enriquez**, for his guidance and support throughout the development of this work
@@ -190,28 +190,28 @@ We would like to express our gratitude to everyone who contributed to the comple
 
 ---
 
-## Future Enhancements
+## ⚙️ Future Enhancements ⚙️
 1. **UI/UX Design Integration**: Improve the aesthetic appeal by incorporating graphical user interface elements and better user experience design
 2. **Expanded Recipe Database**: Include more Filipino recipes beyond the current collection
 3. **Broader Category Range**: Offer additional categories not limited to ulam and meryenda
 4. **Advanced Programming Features**: Implement more sophisticated functionality to make the program more efficient and useful
 5. **Maintain User-Friendliness**: Ensure all enhancements preserve the program's ease of use and accessibility
 
-## Technical Details
+## 🕵️‍♀️ Technical Details 🕵️‍♀️
 - Language: Java (Standard Edition)
 - Paradigm: Object-Oriented Programming
 - Data Structures: ArrayList, HashMap, HashSet, Stream API
 - Design Patterns: Template Method (via abstract class), Strategy (via recipe types)
 - Error Handling: Custom exception (RecipeNotFoundException) for robust error management
 
-## References
+## 🔖 References 🔖
 - Java Documentation: https://docs.oracle.com/javase/
 - Object-Oriented Programming Principles
 - Filipino culinary resources and traditional recipes
 - Java Stream API documentation for functional programming patterns
 
 ---
-Enjoy cooking authentic Filipino dishes withFilipinoCooking.exe! Kain tayo!```
+😋 Enjoy cooking authentic Filipino dishes withFilipinoCooking.exe! Kain tayo!```
 
 
 
