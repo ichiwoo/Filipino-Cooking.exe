@@ -16,26 +16,109 @@ Deciding what to cook can be difficult, especially when ingredients are availabl
 
 ## 💻 OOP Concepts Applied 💻
 
-### 💊 Encapsulation
-- All class fields are declared as private with controlled access through public getter and setter methods
-- Internal data structures (like the recipe list in Cookbook) are hidden from external classes
-- Data validation and normalization are handled internally (e.g., ingredient name trimming in Ingredient class)
+### 🔐 **Encapsulation** 💊
+<div align="center">
+<table width="100%">
+<tr>
+<th width="50%">Aspect</th>
+<th width="50%">Implementation in Our Code</th>
+</tr>
+<tr>
+<td><strong>Data Hiding</strong></td>
+<td>All class fields declared as <code>private</code> in <code>Recipe</code>, <code>Ingredient</code>, <code>Cookbook</code></td>
+</tr>
+<tr>
+<td><strong>Controlled Access</strong></td>
+<td>Public getters like <code>getName()</code>, <code>getRequiredIngredients()</code>, <code>getCategory()</code></td>
+</tr>
+<tr>
+<td><strong>Internal Processing</strong></td>
+<td><code>Ingredient</code> constructor trims and converts names to lowercase automatically</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td><code>Cookbook.findPossibleRecipes()</code> validates and processes data internally</td>
+</tr>
+</table>
+</div>
 
-### 👨‍👩‍👧 Inheritance
-- FoodItem abstract class serves as the base class for all food-related entities
-- Recipe extends FoodItem, inheriting common properties like name
-- QuickRecipe and TraditionalRecipe extend Recipe, inheriting recipe properties while adding specialized functionality
-- Ingredient extends FoodItem, creating a hierarchy of food-related objects
+### 📚 **Inheritance** 👨‍👩‍👧
+<div align="center">
+<table width="100%">
+<tr>
+<th width="50%">Aspect</th>
+<th width="50%">Implementation in Our Code</th>
+</tr>
+<tr>
+<td><strong>Base Class</strong></td>
+<td><code>FoodItem</code> abstract class with <code>protected String name</code> and abstract <code>displayInfo()</code></td>
+</tr>
+<tr>
+<td><strong>Hierarchy</strong></td>
+<td><code>Recipe</code> → <code>QuickRecipe</code> & <code>TraditionalRecipe</code>, <code>Ingredient</code> → <code>FoodItem</code></td>
+</tr>
+<tr>
+<td><strong>Code Reuse</strong></td>
+<td>All subclasses inherit <code>getName()</code> from <code>FoodItem</code> base class</td>
+</tr>
+<tr>
+<td><strong>Specialization</strong></td>
+<td><code>TraditionalRecipe</code> adds <code>region</code>, <code>QuickRecipe</code> adds <code>prepTime</code> fields</td>
+</tr>
+</table>
+</div>
 
-### 🐛 Polymorphism
-- Method Overriding: displayInfo() and displayRecipe() methods are overridden in subclasses to provide specialized behavior
-- Abstract Methods: The abstract displayInfo() method in FoodItem is implemented differently in Recipe, QuickRecipe, and TraditionalRecipe
-- Runtime Binding: The correct display method is called based on the actual object type at runtime
+### 🎭 **Polymorphism** 🐛
+<div align="center">
+<table width="100%">
+<tr>
+<th width="50%">Aspect</th>
+<th width="50%">Implementation in Our Code</th>
+</tr>
+<tr>
+<td><strong>Method Overriding</strong></td>
+<td><code>displayInfo()</code> overridden in <code>Ingredient</code>, <code>Recipe</code>, <code>TraditionalRecipe</code>, <code>QuickRecipe</code></td>
+</tr>
+<tr>
+<td><strong>Abstract Methods</strong></td>
+<td><code>FoodItem.displayInfo()</code> abstract forces all subclasses to implement it</td>
+</tr>
+<tr>
+<td><strong>Runtime Binding</strong></td>
+<td>Calling <code>foodItem.displayInfo()</code> calls correct subclass version at runtime</td>
+</tr>
+<tr>
+<td><strong>Flexible Behavior</strong></td>
+<td>All food items use same <code>displayInfo()</code> method with different implementations</td>
+</tr>
+</table>
+</div>
 
-### 🖼️ Abstraction
-- FoodItem abstract class defines the common interface without implementation details
-- Complex recipe matching algorithms are abstracted behind simple public methods in Cookbook
-- Users interact with high-level operations without needing to understand the internal data structures
+### 🧠 **Abstraction** 🖼️
+<div align="center">
+<table width="100%">
+<tr>
+<th width="50%">Aspect</th>
+<th width="50%">Implementation in Our Code</th>
+</tr>
+<tr>
+<td><strong>Interface Definition</strong></td>
+<td><code>FoodItem</code> defines abstract structure all food items must follow</td>
+</tr>
+<tr>
+<td><strong>Complexity Hiding</strong></td>
+<td>Recipe matching algorithm abstracted inside <code>Cookbook.findPossibleRecipes()</code></td>
+</tr>
+<tr>
+<td><strong>Simplified Interaction</strong></td>
+<td>Users call simple methods without knowing complex internal logic</td>
+</tr>
+<tr>
+<td><strong>Implementation Independence</strong></td>
+<td>Internal data structures hidden from users</td>
+</tr>
+</table>
+</div>
 
 ## 💡 Program Structure 💡
 ### 🔘Main Classes and Their Roles
