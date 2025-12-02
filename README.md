@@ -1,5 +1,6 @@
 
-# 👨‍🍳Filipino Cooking Assistant👩‍🍳
+<h1 align="center" style="color:hotpink;">👨‍🍳 Filipino Cooking Assistant 👩‍🍳</h1>
+
 
 ## 💡Description/Overview💡
 Deciding what to cook can be difficult, especially when ingredients are available but ideas are not. This Java command-line application helps users reduce stress and avoid food waste by suggesting Filipino recipes based on the ingredients they have. The system includes 30+ recipes across categories such as Meat and Poultry, Fish and Seafood, Vegetables, Soup, and Snack/Dessert. Users can view suggested dishes, browse the full recipe catalog, and manage their ingredient inventory. The program also indicates which recipes can’t be cooked due to missing ingredients. With simple inputs, cooking becomes easier, faster, and more efficient.
