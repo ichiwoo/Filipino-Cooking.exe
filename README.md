@@ -1,18 +1,37 @@
-
 <h1 align="center" style="color:hotpink;">👨‍🍳 Filipino Cooking Assistant 👩‍🍳</h1>
 
+<div align="center">
+✨ <strong>Your Smart Kitchen Companion for Authentic Filipino Cuisine</strong> ✨
+</div>
 
-## 💡 Description/Overview 💡
-Deciding what to cook can be difficult, especially when ingredients are available but ideas are not. This Java command-line application helps users reduce stress and avoid food waste by suggesting Filipino recipes based on the ingredients they have. The system includes 30+ recipes across categories such as Meat and Poultry, Fish and Seafood, Vegetables, Soup, and Snack/Dessert. Users can view suggested dishes, browse the full recipe catalog, and manage their ingredient inventory. The program also indicates which recipes can’t be cooked due to missing ingredients. With simple inputs, cooking becomes easier, faster, and more efficient.
+---
 
-🔘 Main Features:
-  - Ingredient-based recipe matching: Input available ingredients to find recipes you can make
-  - Comprehensive Filipino recipe database: 30+ authentic recipes with detailed instructions
-  - Recipe categorization: Browse recipes by food categories
-  - Specialized recipe types: Quick recipes (under 20 mins) and traditional regional recipes
-  - Interactive command-line interface: User-friendly menu system
-  - Inventory management: Track and reuse your ingredient list
+## 💡 **Description/Overview** 💡
 
+> Deciding what to cook can be difficult, especially when ingredients are available but ideas are not. This Java command-line application helps users reduce stress and avoid food waste by suggesting Filipino recipes based on the ingredients they have. The system includes 30+ recipes across categories such as Meat and Poultry, Fish and Seafood, Vegetables, Soup, and Snack/Dessert. Users can view suggested dishes, browse the full recipe catalog, and manage their ingredient inventory. The program also indicates which recipes can’t be cooked due to missing ingredients. With simple inputs, cooking becomes easier, faster, and more efficient.
+
+### 📊 **System Overview:**
+The system includes **30+ recipes** across categories such as:
+- **🥩 Meat and Poultry**
+- **🐟 Fish and Seafood** 
+- **🥦 Vegetables**
+- **🍜 Soup**
+- **🍰 Snack/Dessert**
+
+---
+
+## 🔘 **Main Features** 🔘
+
+| Feature | Description |
+|---------|-------------|
+| **🥗 Ingredient-based Recipe Matching** | Input available ingredients to find recipes you can make |
+| **📚 Comprehensive Filipino Recipe Database** | 30+ authentic recipes with detailed instructions |
+| **📂 Recipe Categorization** | Browse recipes by food categories |
+| **⚡ Specialized Recipe Types** | Quick recipes (under 20 mins) and traditional regional recipes |
+| **💻 Interactive Command-line Interface** | User-friendly menu system |
+| **📦 Inventory Management** | Track and reuse your ingredient list |
+
+---
 
 ## 💻 OOP Concepts Applied 💻
 
