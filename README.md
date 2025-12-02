@@ -180,54 +180,93 @@ This section illustrates the project's class hierarchy and associations, showcas
     TraditionalRecipe --|> Recipe : Extends
     
     Cookbook ..> RecipeNotFoundException : Throws
-### 🔘Main Classes and Their Roles
+### 🔘 **Main Classes and Their Roles** 🔘
 
-**🏠 Main** - The primary entry point and user interface controller
-- Manages the main program loop and menu navigation
-- Handles all user input through the Scanner object
-- Coordinates interactions between the user, Cookbook, and inventory
-- Implements the console-based user interface with clear menu options
+<div align="center" style="border: 2px solid #ff69b4; padding: 10px; border-radius: 10px; margin: 20px 0;">
+<h3 style="color: #e91e63; margin: 10px 0;">📊 Core Application Architecture</h3>
+</div>
 
-**📔 Cookbook** - The central database and recipe manager
-- Stores and organizes all recipe objects in an ArrayList
-- Implements recipe search and matching algorithms using Stream API
-- Groups recipes by category using HashMap for efficient organization
-- Provides methods to find recipes based on available ingredients
-- Contains helper methods for ingredient matching and normalization
+---
 
-**🍲 FoodItem** (abstract) - The foundation of the food hierarchy
-- Defines the common name property for all food-related items
-- Declares the abstract displayInfo() method that all subclasses must implement
-- Establishes the base structure for the inheritance hierarchy
+#### **🏠 MAIN** - The Primary Entry Point and User Interface Controller
+<div style="background-color: #fff5f7; padding: 15px; border-radius: 10px; border-left: 5px solid #ff69b4; margin: 15px 0;">
+✅ **• Manages the main program loop and menu navigation**<br>
+✅ **• Handles all user input through the Scanner object**<br>
+✅ **• Coordinates interactions between the user, Cookbook, and inventory**<br>
+✅ **• Implements the console-based user interface with clear menu options**
+</div>
 
-**📖 Recipe** - Represents a complete cooking recipe
-- Extends FoodItem and serves as the base for specialized recipes
-- Stores recipe details: name, required ingredients list, instructions, and category
-- Implements the displayInfo() method to show recipe details
-- Contains the core recipe display logic with formatted output
+---
 
-**📑 QuickRecipe** - Specialized recipe for fast meals
-- Extends Recipe class
-- Adds preparation time property (in minutes)
-- Overrides displayInfo() to include quick meal details
-- Represents recipes that can be prepared in under 20 minutes
+#### **📔 COOKBOOK** - The Central Database and Recipe Manager
+<div style="background-color: #f0f8ff; padding: 15px; border-radius: 10px; border-left: 5px solid #2196f3; margin: 15px 0;">
+🔍 **• Stores and organizes all recipe objects in an ArrayList**<br>
+🔍 **• Implements recipe search and matching algorithms using Stream API**<br>
+🔍 **• Groups recipes by category using HashMap for efficient organization**<br>
+🔍 **• Provides methods to find recipes based on available ingredients**<br>
+🔍 **• Contains helper methods for ingredient matching and normalization**
+</div>
 
-**🧾 TraditionalRecipe** - Specialized recipe for regional dishes
-- Extends Recipe class
-- Adds region of origin property
-- Overrides displayInfo() to include regional information
-- Represents traditional Filipino dishes from specific regions
+---
 
-**🍅 Ingredient** - Represents individual food ingredients
-- Extends FoodItem
-- Normalizes ingredient names (trimming and converting to lowercase)
-- Implements simple display functionality
-- Used in the user's ingredient inventory
+#### **🍲 FOODITEM** (Abstract) - The Foundation of the Food Hierarchy
+<div style="background-color: #fff8e1; padding: 15px; border-radius: 10px; border-left: 5px solid #ff9800; margin: 15px 0;">
+⚡ **• Defines the common name property for all food-related items**<br>
+⚡ **• Declares the abstract displayInfo() method that all subclasses must implement**<br>
+⚡ **• Establishes the base structure for the inheritance hierarchy**
+</div>
 
-**‼️ RecipeNotFoundException** - Custom exception class
-- Extends Exception class
-- Used when a requested recipe cannot be found
-- Provides meaningful error messages for better user experience
+---
+
+#### **📖 RECIPE** - Represents a Complete Cooking Recipe
+<div style="background-color: #f1f8e9; padding: 15px; border-radius: 10px; border-left: 5px solid #4caf50; margin: 15px 0;">
+📋 **• Extends FoodItem and serves as the base for specialized recipes**<br>
+📋 **• Stores recipe details: name, required ingredients list, instructions, and category**<br>
+📋 **• Implements the displayInfo() method to show recipe details**<br>
+📋 **• Contains the core recipe display logic with formatted output**
+</div>
+
+---
+
+#### **📑 QUICKRECIPE** - Specialized Recipe for Fast Meals
+<div style="background-color: #e8f4fd; padding: 15px; border-radius: 10px; border-left: 5px solid #03a9f4; margin: 15px 0;">
+⚡ **• Extends Recipe class**<br>
+⚡ **• Adds preparation time property (in minutes)**<br>
+⚡ **• Overrides displayInfo() to include quick meal details**<br>
+⚡ **• Represents recipes that can be prepared in under 20 minutes**
+</div>
+
+---
+
+#### **🧾 TRADITIONALRECIPE** - Specialized Recipe for Regional Dishes
+<div style="background-color: #f3e5f5; padding: 15px; border-radius: 10px; border-left: 5px solid #9c27b0; margin: 15px 0;">
+🏮 **• Extends Recipe class**<br>
+🏮 **• Adds region of origin property**<br>
+🏮 **• Overrides displayInfo() to include regional information**<br>
+🏮 **• Represents traditional Filipino dishes from specific regions**
+</div>
+
+---
+
+#### **🍅 INGREDIENT** - Represents Individual Food Ingredients
+<div style="background-color: #e8f5e9; padding: 15px; border-radius: 10px; border-left: 5px solid #2e7d32; margin: 15px 0;">
+🥦 **• Extends FoodItem**<br>
+🥦 **• Normalizes ingredient names (trimming and converting to lowercase)**<br>
+🥦 **• Implements simple display functionality**<br>
+🥦 **• Used in the user's ingredient inventory**
+</div>
+
+---
+
+#### **‼️ RECIPENOTFOUNDEXCEPTION** - Custom Exception Class
+<div style="background-color: #ffebee; padding: 15px; border-radius: 10px; border-left: 5px solid #f44336; margin: 15px 0;">
+⚠️ **• Extends Exception class**<br>
+⚠️ **• Used when a requested recipe cannot be found**<br>
+⚠️ **• Provides meaningful error messages for better user experience**
+</div>
+
+---
+
 
 ### 💡 Class Hierarchy and Relationships 💡
 
