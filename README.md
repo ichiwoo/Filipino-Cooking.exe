@@ -89,15 +89,20 @@ Deciding what to cook can be difficult, especially when ingredients are availabl
 
 ### 💡Class Hierarchy and Relationships💡
 
+```bash
 FoodItem (abstract)
-|-- Recipe (extends FoodItem)
-|   |-- QuickRecipe (extends Recipe)
-|   |-- TraditionalRecipe (extends Recipe)
-|-- Ingredient (extends FoodItem)
+|
+├── Recipe (extends FoodItem)
+│   ├── QuickRecipe (extends Recipe)
+│   └── TraditionalRecipe (extends Recipe)
+|
+└── Ingredient (extends FoodItem)
 
 Main (Program Entry Point)
-|-- Cookbook (Recipe Manager)
-|-- RecipeNotFoundException (Custom Exception)
+|
+├── Cookbook (Recipe Manager)
+└── RecipeNotFoundException (Custom Exception)
+```
 
 ### Key Relationships
 - Composition: Cookbook contains a List of Recipe objects
