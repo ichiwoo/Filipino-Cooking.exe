@@ -139,14 +139,14 @@ Main (Program Entry Point)
 | Screenshot | Description |
 |------------|-------------|
 | <img width="300" alt="Main Menu" src="https://github.com/user-attachments/assets/7c86277e-8bc8-4135-adc9-a21015323973" /> | **Main Menu** - The starting interface with all available options |
-| <img width="300" alt="Ingredient Input" src="https://github.com/user-attachments/assets/fd81d20e-73f9-440e-b06d-7d4e599cbde9" /> | **Ingredient Input** - Adding ingredients to your inventory |
-| <img width="400" alt="Recipe Suggestions" src="https://github.com/user-attachments/assets/50ab2b1d-e717-4f5e-8d99-104de47fa9d2" /> | **Recipe Suggestions** - Recipes you can cook with available ingredients |
-| <img width="300" alt="Recipe Categories" src="https://github.com/user-attachments/assets/e3ce337a-2ab7-4a5d-9703-6603d1dcf880" /> | **Recipe Categories** - Browse recipes by food type |
-| <img width="300" alt="Quick Recipes" src="https://github.com/user-attachments/assets/f0ec5824-de32-4372-8eb9-afefedc4c825" /> | **Quick Recipes** - Meals that can be prepared in under 20 minutes |
-| <img width="300" alt="Traditional Recipes" src="https://github.com/user-attachments/assets/d4c300fd-5a75-42ad-84cf-da057cd8dc58" /> | **Traditional Recipes** - Regional Filipino dishes |
-| <img width="300" alt="Recipe Details" src="https://github.com/user-attachments/assets/e1994789-4d76-4674-882a-32970aea9258" /> | **Recipe Details** - Complete recipe with ingredients and instructions |
-| <img width="300" alt="Missing Ingredients" src="https://github.com/user-attachments/assets/84fbf771-bf76-442e-b636-01f3ea4fc403" /> | **Missing Ingredients** - Shows what ingredients are needed for a recipe |
-| <img width="300" alt="Inventory Management" src="https://github.com/user-attachments/assets/e8cdace2-ecfe-4f52-8977-9ba786e806ba" /> | **Inventory Management** - View and manage your ingredient list |
+| <img width="300" alt="Ingredient Input" src="https://github.com/user-attachments/assets/fd81d20e-73f9-440e-b06d-7d4e599cbde9" /> | **Ingredient Input & Recipe Suggestions** - Adding ingredients to your inventory and showing what you can cook |
+| <img width="400" alt="Recipe Suggestions" src="https://github.com/user-attachments/assets/50ab2b1d-e717-4f5e-8d99-104de47fa9d2" /> | **Recipe** - Recipe of your selected dish from the suggestions |
+| <img width="300" alt="Recipe Categories" src="https://github.com/user-attachments/assets/e3ce337a-2ab7-4a5d-9703-6603d1dcf880" /> | **Inventory** - List of ingredients added |
+| <img width="300" alt="Quick Recipes" src="https://github.com/user-attachments/assets/f0ec5824-de32-4372-8eb9-afefedc4c825" /> | **Append Ingredients** - Add ingredients to inventory |
+| <img width="300" alt="Traditional Recipes" src="https://github.com/user-attachments/assets/d4c300fd-5a75-42ad-84cf-da057cd8dc58" /> | **Recipe Catalog** - Browse recipes by catgeory |
+| <img width="300" alt="Recipe Details" src="https://github.com/user-attachments/assets/e1994789-4d76-4674-882a-32970aea9258" /> | **Ingredient Index** - Browse ingredients that can be added |
+| <img width="300" alt="Missing Ingredients" src="https://github.com/user-attachments/assets/84fbf771-bf76-442e-b636-01f3ea4fc403" /> | **Help & About** - Shows instructions on how to use the program |
+| <img width="300" alt="Inventory Management" src="https://github.com/user-attachments/assets/e8cdace2-ecfe-4f52-8977-9ba786e806ba" /> | **Thank You Message** - Shows when you exit the program |
 
 
 
