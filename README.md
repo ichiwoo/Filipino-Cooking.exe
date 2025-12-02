@@ -121,50 +121,64 @@ Deciding what to cook can be difficult, especially when ingredients are availabl
 </div>
 
 ## 💡 Program Structure 💡
-class Main {
-        - Scanner scanner
-        - List~Ingredient~ inventory
-        - Cookbook cookbook
-        + main()
-        + run()
+This section illustrates the project's class hierarchy and associations, showcasing how core Object-Oriented Programming (OOP) principles are applied in the application's architecture.
+
+    class Main {
+        -Scanner scanner
+        -List~Ingredient~ inventory
+        -Cookbook cookbook
+        +main()
+        +run()
     }
+
     class Cookbook {
-        - List~Recipe~ allRecipes
-        + findPossibleRecipes()
-        + getRecipeByName()
+        -List~Recipe~ allRecipes
+        +findPossibleRecipes()
+        +getRecipeByName()
     }
+
     class FoodItem {
         <<Abstract>>
-        # String name
-        + displayInfo()*
+        #String name
+        +displayInfo()*
     }
+
     class Ingredient {
-        + Ingredient(name)
+        +Ingredient(name)
     }
+
     class Recipe {
-        - List~String~ requiredIngredients
-        - String instructions
-        - String category
-        + displayRecipe()
+        -List~String~ requiredIngredients
+        -String instructions
+        -String category
+        +displayRecipe()
     }
+
     class QuickRecipe {
-        - int prepTime
-        + displayInfo()
+        -int prepTime
+        +displayInfo()
     }
+
     class TraditionalRecipe {
-        - String region
-        + displayInfo()
+        -String region
+        +displayInfo()
     }
+
     class RecipeNotFoundException {
         <<Exception>>
     }
+
+    %% Relationships
     Main --> Cookbook : Uses/Manages
     Main o-- Ingredient : Manages Inventory
     Cookbook o-- Recipe : Contains List
+    
     Ingredient --|> FoodItem : Extends
     Recipe --|> FoodItem : Extends
+    
     QuickRecipe --|> Recipe : Extends
     TraditionalRecipe --|> Recipe : Extends
+    
     Cookbook ..> RecipeNotFoundException : Throws
 ### 🔘Main Classes and Their Roles
 
